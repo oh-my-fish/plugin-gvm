@@ -1,5 +1,5 @@
 for gvm_path in (find $HOME/.gvm/*/current/bin -maxdepth 0)
-  _prepend_path $gvm_path
+  set PATH $gvm_path $PATH
   set -l module_info (echo $gvm_path | perl -ne 'm|(.*/.gvm/(\w+)/current)/bin| && print "$1 $2"')
   set -l module_dir (echo $module_info | awk -F' ' '{print $1}')
   set -l module_name (echo $module_info | awk -F' ' '{print $2}')
@@ -27,4 +27,3 @@ end
 if test -z $JAVA_HOME
   echo "GVM: JAVA_HOME not set please set JAVA_HOME."
 end
-
