@@ -1,5 +1,8 @@
 for gvm_path in (find $HOME/.gvm/*/current/bin -maxdepth 0)
-  set PATH $gvm_path $PATH
+  if not contains $gvm_path $PATH
+    set PATH $gvm_path $PATH
+  end
+
   set -l module_info (echo $gvm_path | perl -ne 'm|(.*/.gvm/(\w+)/current)/bin| && print "$1 $2"')
   set -l module_dir (echo $module_info | awk -F' ' '{print $1}')
   set -l module_name (echo $module_info | awk -F' ' '{print $2}')
